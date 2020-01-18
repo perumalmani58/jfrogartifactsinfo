@@ -10,8 +10,8 @@
 
     <scm>
         <url>https://github.com/perumalmani58/jfrogartifactsinfo</url>
-        <connection>scm:git:ssh://github.com/perumalmani58/jfrogartifactsinfo.git</connection>
-        <developerConnection>scm:git:ssh://github.com/perumalmani58/jfrogartifactsinfo.git</developerConnection>
+        <connection>scm:git:git://github.com/perumalmani58/jfrogartifactsinfo.git</connection>
+        <developerConnection>scm:git:git@github.com:perumalmani58/jfrogartifactsinfo.git</developerConnection>
     </scm>
 
     <build>
