@@ -4,13 +4,13 @@
 
     <groupId>com.test.artifacts</groupId>
     <artifactId>jfrog-artifactsinfo</artifactId>
-    <version>1.5</version>
+    <version>1.6-SNAPSHOT</version>
 
     <scm>
         <url>https://github.com/perumalmani58/jfrogartifactsinfo</url>
         <connection>scm:git:git://github.com/perumalmani58/jfrogartifactsinfo.git</connection>
         <developerConnection>scm:git:git@github.com:perumalmani58/jfrogartifactsinfo.git</developerConnection>
-      <tag>jfrog-artifactsinfo-1.5</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <build>
