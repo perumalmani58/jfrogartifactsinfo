@@ -1,4 +1,4 @@
-package com.test.model;
+package org.jfrog.model;
 
 import java.util.HashMap;
 import java.util.List;
