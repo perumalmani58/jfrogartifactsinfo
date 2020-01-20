@@ -20,9 +20,9 @@ public class MostDownloadedArtifacts {
 
     public static void main(String[] args) throws Exception {
         if (args.length != 3) {
-            throw new IllegalArgumentException("Arguments Required, Usage: " +
-                  "java MostDownloadedArtifacts.class <artifactoryUrl> <username> <password> \n" +
-                  "Ex: java MostDownloadedArtifacts.class http://serverName/artifactory userName password");
+            throw new IllegalArgumentException("Arguments Required, Usage: <artifactoryUrl> <username> <password> \n" +
+                  "Ex: java -jar jfrog-artifactsinfo-1.7-SNAPSHOT-jar-with-dependencies.jar http://serverName/artifactory userName password \n" +
+                  "(OR) java MostDownloadedArtifacts http://serverName/artifactory userName password");
         }
         MostDownloadedArtifacts mostDownloadedArtifacts = new MostDownloadedArtifacts();
         List<RepoItem> repoItems = mostDownloadedArtifacts

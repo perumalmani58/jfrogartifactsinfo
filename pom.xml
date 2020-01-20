@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.test.artifacts</groupId>
+    <groupId>org.jfrog.artifacts</groupId>
     <artifactId>jfrog-artifactsinfo</artifactId>
     <version>1.7-SNAPSHOT</version>
 
@@ -29,6 +29,38 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.5.3</version>
             </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <mainClass>org.jfrog.artifacts.MostDownloadedArtifacts</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin><!--
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>-->
         </plugins>
     </build>
 
@@ -45,7 +77,12 @@
             <groupId>org.jfrog.artifactory.client</groupId>
             <artifactId>artifactory-java-client-services</artifactId>
             <version>2.6.0</version>
-        </dependency>
+        </dependency> <!--
+        <dependency>
+            <groupId>org.jfrog.artifactory.client</groupId>
+            <artifactId>artifactory-java-client-api</artifactId>
+            <version>2.6.0</version>
+        </dependency> -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
