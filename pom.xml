@@ -4,7 +4,7 @@
 
     <groupId>org.jfrog.artifacts</groupId>
     <artifactId>jfrog-artifactsinfo</artifactId>
-    <version>1.7-SNAPSHOT</version>
+    <version>1.8-SNAPSHOT</version>
 
     <scm>
         <url>https://github.com/perumalmani58/jfrogartifactsinfo</url>
