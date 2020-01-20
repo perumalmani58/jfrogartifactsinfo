@@ -87,7 +87,7 @@ public class MostDownloadedArtifacts {
     private static String getPassword() {
         Console console = System.console();
         if (console == null) {
-            System.out.println("Couldn't get Console instance");
+            System.out.println("Couldn't get Console instance, Please input the password as last argument while running the application");
             System.exit(0);
         }
 
