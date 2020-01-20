@@ -1,5 +1,6 @@
 package org.jfrog.artifacts;
 
+import java.io.Console;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,14 +20,22 @@ public class MostDownloadedArtifacts {
     private Logger log = LoggerFactory.getLogger(MostDownloadedArtifacts.class);
 
     public static void main(String[] args) throws Exception {
-        if (args.length != 4) {
-            throw new IllegalArgumentException("Arguments Required, Usage: <artifactoryUrl> <repositoryName> <username> <password> \n" +
-                  "Ex: java -jar jfrog-artifactsinfo-1.7-SNAPSHOT-jar-with-dependencies.jar http://serverName/artifactory jcenter-cache userName password \n" +
-                  "(OR) java MostDownloadedArtifacts http://serverName/artifactory jcenter-cache userName password");
+        if (args.length < 3 || args.length > 4) {
+            throw new IllegalArgumentException("Arguments Required, Usage: artifactoryUrl repositoryName userName <password>\n" +
+                  "Ex: java -jar jfrog-artifactsinfo-1.7-SNAPSHOT-jar-with-dependencies.jar http://serverName/artifactory jcenter-cache userName <password> \n" +
+                  "(OR) java MostDownloadedArtifacts http://serverName/artifactory jcenter-cache userName <password> \n" +
+                  "<password> is not required in the arguments when you run from console");
         }
+
+        String password;
+        if (args.length < 4) {
+            password = getPassword();
+        }
+        else password = args[3];
+
         MostDownloadedArtifacts mostDownloadedArtifacts = new MostDownloadedArtifacts();
         List<RepoItem> repoItems = mostDownloadedArtifacts
-              .getTopTwoDownloadedArtifacts(args[0], args[1], args[2], args[3]);
+              .getTopTwoDownloadedArtifacts(args[0], args[1], args[2], password);
         System.out.println("\nOutput - Top 2 Downloaded Artifacts: ");
         repoItems.forEach(System.out::println);
     }
@@ -58,7 +67,7 @@ public class MostDownloadedArtifacts {
                   .limit(2).collect(Collectors.toList());
         }
         catch (Exception e) {
-            log.error("Exception while retrieving the top two doanloaded artifacts: " + e.getMessage());
+            log.error("Exception while retrieving the top two downloaded artifacts: " + e.getMessage());
             throw new Exception("Exception while retrieving the top two doanloaded artifacts: " + e.getMessage());
         }
     }
@@ -73,5 +82,16 @@ public class MostDownloadedArtifacts {
               .setUsername(username)
               .setPassword(password)
               .build();
+    }
+
+    private static String getPassword() {
+        Console console = System.console();
+        if (console == null) {
+            System.out.println("Couldn't get Console instance");
+            System.exit(0);
+        }
+
+        char[] passwordArray = console.readPassword("Enter the Artifactory password: ");
+        return new String(passwordArray);
     }
 }

@@ -49,18 +49,7 @@
                         </manifest>
                     </archive>
                 </configuration>
-            </plugin><!--
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>copy-dependencies</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>-->
+            </plugin>
         </plugins>
     </build>
 
@@ -77,12 +66,7 @@
             <groupId>org.jfrog.artifactory.client</groupId>
             <artifactId>artifactory-java-client-services</artifactId>
             <version>2.6.0</version>
-        </dependency> <!--
-        <dependency>
-            <groupId>org.jfrog.artifactory.client</groupId>
-            <artifactId>artifactory-java-client-api</artifactId>
-            <version>2.6.0</version>
-        </dependency> -->
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
