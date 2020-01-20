@@ -31,13 +31,14 @@ public class MostDownloadedArtifactsTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testInvalidArguments() throws Exception {
-        mostDownloadedArtifacts.getTopTwoDownloadedArtifacts("", "", "");
+        mostDownloadedArtifacts.getTopTwoDownloadedArtifacts("", "", "", "");
     }
 
     @Test
     public void testInvalidHost() throws Exception {
         thrown.expect(Exception.class);
         thrown.expectMessage("Exception while retrieving the top two doanloaded artifacts");
-        mostDownloadedArtifacts.getTopTwoDownloadedArtifacts("http://127.0.0.1/artifactor", "test", "test");
+        mostDownloadedArtifacts.getTopTwoDownloadedArtifacts("http://127.0.0.1/artifactor",
+              "jcenter-cache", "test", "test");
     }
 }

@@ -19,18 +19,19 @@ public class MostDownloadedArtifacts {
     private Logger log = LoggerFactory.getLogger(MostDownloadedArtifacts.class);
 
     public static void main(String[] args) throws Exception {
-        if (args.length != 3) {
-            throw new IllegalArgumentException("Arguments Required, Usage: <artifactoryUrl> <username> <password> \n" +
-                  "Ex: java -jar jfrog-artifactsinfo-1.7-SNAPSHOT-jar-with-dependencies.jar http://serverName/artifactory userName password \n" +
-                  "(OR) java MostDownloadedArtifacts http://serverName/artifactory userName password");
+        if (args.length != 4) {
+            throw new IllegalArgumentException("Arguments Required, Usage: <artifactoryUrl> <repositoryName> <username> <password> \n" +
+                  "Ex: java -jar jfrog-artifactsinfo-1.7-SNAPSHOT-jar-with-dependencies.jar http://serverName/artifactory jcenter-cache userName password \n" +
+                  "(OR) java MostDownloadedArtifacts http://serverName/artifactory jcenter-cache userName password");
         }
         MostDownloadedArtifacts mostDownloadedArtifacts = new MostDownloadedArtifacts();
         List<RepoItem> repoItems = mostDownloadedArtifacts
-              .getTopTwoDownloadedArtifacts(args[0], args[1], args[2]);
+              .getTopTwoDownloadedArtifacts(args[0], args[1], args[2], args[3]);
+        System.out.println("\nOutput - Top 2 Downloaded Artifacts: ");
         repoItems.forEach(System.out::println);
     }
 
-    public List<RepoItem> getTopTwoDownloadedArtifacts(String artifactoryUrl, String userName, String password)
+    public List<RepoItem> getTopTwoDownloadedArtifacts(String artifactoryUrl, String repoName, String userName, String password)
         throws Exception {
         Artifactory artifactory = createArtifactory(userName, password, artifactoryUrl);
         if (artifactory == null) {
@@ -39,7 +40,7 @@ public class MostDownloadedArtifacts {
 
         ArtifactoryRequest repositoryRequest = new ArtifactoryRequestImpl().apiUrl("/api/search/aql")
               .method(ArtifactoryRequest.Method.POST)
-              .requestBody("items.find( { \"repo\": {\"$eq\":\"jcenter-cache\"},\"name\" : {\"$match\":\"*.jar\"} })" +
+              .requestBody("items.find( { \"repo\": {\"$eq\": \"" + repoName+ "\"},\"name\" : {\"$match\":\"*.jar\"} })" +
                     ".include(\"path\", \"name\", \"stat.downloads\")")
               .responseType(ArtifactoryRequest.ContentType.JSON);
 
